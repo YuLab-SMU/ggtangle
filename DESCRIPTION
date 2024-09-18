@@ -1,0 +1,24 @@
+Package: ggtangle
+Title: Draw Network with Data
+Version: 0.0.1
+Authors@R: c(
+    person(given = "Guangchuang", family = "Yu", email = "guangchuangyu@gmail.com",   role  = c("aut", "cre"), comment = c(ORCID = "0000-0002-6485-8781")))
+Description: 'ggtangle' extends the 'ggplot2' plotting system to support network visualization. 'ggtangle' is inspired by 'ggtree' and aims to work with network associated data. 
+Imports:
+    ggfun (>= 0.1.6),
+    ggplot2,
+    igraph,
+    rlang,
+    yulab.utils (>= 0.1.6)
+Suggests:
+    aplot,
+    ggtree,
+    knitr,
+    prettydoc,
+    rmarkdown,
+    scatterpie (>= 0.2.4)
+VignetteBuilder: knitr
+License: Artistic-2.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
