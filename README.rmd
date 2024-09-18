@@ -2,7 +2,7 @@
 # ggtangle: Draw Network with Data
 
 ```{r comment="", echo=FALSE, results='asis'}
-cat(packageDescription('ggbreak')$Description)
+cat(packageDescription('ggtangle')$Description)
 ```
 
 ## :writing_hand: Authors
