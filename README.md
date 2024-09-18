@@ -6,7 +6,7 @@ network associated data.
 
 ## :writing_hand: Authors
 
-Guangchuang YU & Shuangbin XU
+Guangchuang YU
 
 School of Basic Medical Sciences, Southern Medical University
 
