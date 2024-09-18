@@ -29,23 +29,22 @@ knitr::opts_chunk$set(warning = FALSE,
                       message = TRUE)
 
 library(yulab.utils)
-pload(igraph)
-pload(ggplot2)
-pload(ggtangle)
-pload(aplot)
-pload(ggfun)
+library(igraph)
+library(ggplot2)
+library(ggtangle)
+library(aplot)
+library(ggfun)
 ```
 
 ## Simple Network Visualization
 
 ```{r}
 library(yulab.utils)
-
-pload(igraph)
-pload(ggplot2)
-pload(ggtangle)
-pload(aplot)
-pload(ggfun)
+library(igraph)
+library(ggplot2)
+library(ggtangle)
+library(aplot)
+library(ggfun)
 
 net <- erdos.renyi.game(10, .5)
 
@@ -116,7 +115,7 @@ g <- igraph::graph_from_data_frame(flow_info)
 
 p <- ggplot(g)  + geom_edge()
 
-pload(scatterpie)
+library(scatterpie)
 
 p %<+% dd + 
     geom_scatterpie(cols = c("v1", "v2", "v3")) +
