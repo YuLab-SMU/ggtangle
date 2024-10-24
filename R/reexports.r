@@ -16,6 +16,10 @@ ggplot2::aes
 ##' @export
 ggplot2::geom_text
 
+##' @importFrom ggplot2 geom_point
+##' @export
+ggplot2::geom_point
+
 ##' @importFrom ggplot2 geom_label
 ##' @export
 ggplot2::geom_label
@@ -32,3 +36,9 @@ ggplot2::ggsave
 ##' @importFrom ggfun %<+%
 ##' @export
 ggfun::`%<+%`
+
+
+##' @importFrom ggfun td_filter
+##' @export
+ggfun::td_filter
+

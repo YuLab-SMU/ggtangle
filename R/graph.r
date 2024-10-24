@@ -28,7 +28,7 @@ ggplot.igraph <- function(data = NULL,
 
     p <- ggplot(d, aes(.data$x, .data$y)) + theme_nothing() 
     assign("graph", data, envir = p$plot_env)
-    class(p) <- c("ggflow", class(p))
+    class(p) <- c("ggtangle", class(p))
     return(p)
 }
 

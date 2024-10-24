@@ -1,6 +1,6 @@
 ---
 title: "ggtangle: Draw Network with Data"
-author: "Guangchuang Yu and Shuangbin Xu\\
+author: "Guangchuang Yu\\
 
         School of Basic Medical Sciences, Southern Medical University"
 date: "`r Sys.Date()`"
