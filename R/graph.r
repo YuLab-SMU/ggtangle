@@ -15,7 +15,9 @@ ggplot.igraph <- function(data = NULL,
         environment = parent.frame()
     ) {
     
-    d <- as.data.frame(layout(data, ...)) |> setNames(c("x", "y"))
+    layout_data <- layout(data, ...)
+    if(is.list(layout_data)) layout_data <- layout_data$layout
+    d <- as.data.frame(layout_data) |> setNames(c("x", "y"))
     d$label <- V(data)$name
     if (is.null(d$label)) d$label <- as.character(V(data))
 
