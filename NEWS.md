@@ -1,3 +1,7 @@
+# ggtangle 0.0.4
+
++ compatible with more igraph layouts (2024-10-29, Tue)
+
 # ggtangle 0.0.3
 
 + `drag_network()` from 'enrichplot' (2024-10-24, Thu)
