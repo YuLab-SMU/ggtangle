@@ -17,14 +17,22 @@ cnetplot.list <- function(
         ...
     ) {
 
-    node_label <- match.arg(node_label, c("category", "all", "none", "item", "gene"))
+    # node_label <- match.arg(node_label, c("category", "all", "none", "item", "gene", "exclusive", "share"))
+    if (!node_label %in% c("category", "all", "none", "item", "gene", "exclusive", "share")) {
+        if (!grepl("[><=]", node_label)) {
+            stop("wrong parameter for 'node_label'")
+        } else if (is.null(foldChange)) {
+            stop("'foldChange' should not be NULL with the 'node_label' setting")
+        }
+    }
+
     if (node_label == "gene") node_label = "item"
     
     x <- subset_cnet_list(x, showCategory)
     g <- list2graph(x)
 
     V(g)$.hilight <- 1
-    if (hilight != "none") {
+    if (all(hilight != "none")) {
         # maybe color the edge ?
 
         y <- subset_cnet_list(x, hilight)
@@ -65,9 +73,23 @@ cnetplot.list <- function(
         d <- td_filter(.data$.isCategory)
     } else if (node_label == "item") {
         d <- td_filter(!.data$.isCategory)
-    } 
+    } else if (node_label %in% c("exclusive", "share")) {
+        node_to_label <- lapply(seq_along(x), function(i) {
+            j <- x[[i]] %in% unlist(x[-i])
+            if (node_label == "exclusive") {
+                return(x[[i]][!j])
+            } else {
+                return(x[[i]][j])
+            }
+        })
+        d <- td_filter(.data$label %in% unlist(node_to_label))
+    } else {
+        d <- td_filter(!!str2lang(paste("foldChange", node_label)))
+    }
+
 
     p <- p + geom_text_repel(aes(label=.data$label), data = d, bg.color="white", bg.r=.1)    
+
     return(p)
 }
  
