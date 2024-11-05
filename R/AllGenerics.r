@@ -10,7 +10,7 @@
 #' @param size_item relative size of the item (e.g., genes)
 #' @param color_edge color of edge
 #' @param size_edge relative size of edge
-#' @param node_label one of 'all', 'none', 'category' and 'item'
+#' @param node_label one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'
 #' @param foldChange numeric values to color the item (e.g, foldChange of gene expression values)
 #' @param hilight selected category to be highlighted
 #' @param hilight_alpha transparent value for not selected to be highlight

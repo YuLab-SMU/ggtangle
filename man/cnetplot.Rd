@@ -58,7 +58,7 @@ cnetplot(
 
 \item{size_edge}{relative size of edge}
 
-\item{node_label}{one of 'all', 'none', 'category' and 'item'}
+\item{node_label}{one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'}
 
 \item{foldChange}{numeric values to color the item (e.g, foldChange of gene expression values)}
 
