@@ -29,7 +29,7 @@ ggplot.igraph <- function(data = NULL,
     }
 
     p <- ggplot(d, aes(.data$x, .data$y)) + theme_nothing() 
-    assign("graph", data, envir = p$plot_env)
+    # assign("graph", data, envir = p$plot_env)
     class(p) <- c("ggtangle", class(p))
     return(p)
 }
@@ -100,7 +100,8 @@ ggplot_add.layer_edge <- function(object, plot, object_name) {
     params <- object$params
 
     if (is.null(object$data)) {
-        e <- get_edge_data(plot$plot_env$graph)
+        # e <- get_edge_data(plot$plot_env$graph)
+        e <- get_edge_data(plot$plot_env$data)
         d <- plot$data
         d1 <- d[match(e[,1], d$label), c("x", "y")]
         d2 <- d[match(e[,2], d$label), c("x", "y")]

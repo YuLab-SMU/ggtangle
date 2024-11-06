@@ -60,20 +60,39 @@ cnetplot.list <- function(
             data=td_filter(!.data$.isCategory), size = 3 * size_item) +
         scale_size(range=c(3, 8) * size_category) 
     
-    if (node_label == "none") {
-        return(p)
+    if (node_label != "none") {
+        p <- p + geom_cnet_label(node_label = node_label)
     }
 
-    if (node_label == "all") {
-        p <- p + geom_text_repel(aes(label=.data$label), bg.color="white", bg.r=.1)     
-        return(p)
+    return(p)
+}
+
+#' @method ggplot_add cnet_label
+#' @export
+ggplot_add.cnet_label <- function(object, plot, object_name) {
+    params <- object$params
+    node_label <- object$node_label
+    default_params <- list(bg.color = "white", bg.r = 1)
+    params <- modifyList(default_params, params)
+
+    default_mapping <- aes(label=.data$label)  
+    if (is.null(object$mapping)) {
+        params$mapping <- default_mapping
+    } else {
+        params$mapping <- modifyList(default_mapping, object$mapping)
     }
 
-    if (node_label == "category") {
+    if (!is.null(object$data)) {
+        d <- object$data
+    } else if (node_label == "all") {
+        d <- NULL
+    } else if (node_label == "category") {
         d <- td_filter(.data$.isCategory)
     } else if (node_label == "item") {
         d <- td_filter(!.data$.isCategory)
     } else if (node_label %in% c("exclusive", "share")) {
+        e <- as_edgelist(plot$plot_env$data)
+        x <- split(e[,2], e[,1])
         node_to_label <- lapply(seq_along(x), function(i) {
             j <- x[[i]] %in% unlist(x[-i])
             if (node_label == "exclusive") {
@@ -87,12 +106,32 @@ cnetplot.list <- function(
         d <- td_filter(!!str2lang(paste("foldChange", node_label)))
     }
 
+    params$data <- d
 
-    p <- p + geom_text_repel(aes(label=.data$label), data = d, bg.color="white", bg.r=.1)    
-
-    return(p)
+    layer <- do.call(geom_text_repel, params) #(aes(label=.data$label), data = d, bg.color="white", bg.r=.1)    
+    ggplot_add(layer, plot, object_name)
 }
- 
+
+#' add labels of cnetplot
+#' 
+#' @title geom_cnet_label
+#' @param mapping aes mapping, default is NULL
+#' @param data plot data, default is NULL
+#' @param node_label which type of node label to be displayed, see also [cnetplot]
+#' @param ... parameters that passed to `geom_text_repel`
+#' @export 
+#' @author Guangchuang Yu
+geom_cnet_label <- function(mapping = NULL, data=NULL, node_label = "all", ...) {
+    structure(
+        list(
+            mapping = mapping,
+            data = data, 
+            node_label = node_label,
+            params = list(...)
+        ),
+        class = "cnet_label"
+    )
+}
 
 
 subset_cnet_list <- function(x, showCategory) {
