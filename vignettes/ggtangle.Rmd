@@ -143,6 +143,18 @@ plot_list(p1, p2, p3, p4, p5, p6, ncol=3, tag_levels = 'A')
 ```
 
 
+`node_label` can be selected items/genes to specify which genes to be labelled and can also used to subset the graph.
+
+```{r fig.width=8, fig.height=5}
+g1 <- cnetplot(x, node_label = letters[1:5]) 
+
+options(cnetplot_subset = TRUE)
+g2 <- cnetplot(x, node_label = letters[1:5])
+
+plot_list(g1, g2)
+```
+
+
 ```{r, fig.width=11, fig.height=8}
 set.seed(123)
 d <- setNames(rnorm(26), letters)

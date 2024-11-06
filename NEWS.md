@@ -1,5 +1,6 @@
 # ggtangle 0.0.4.003
 
++ update vignette to add a session of `cnetplot()` (2024-11-06, Wed)
 + 'node_label' can be a vector of selected items/genes to specify the items displayed in `cnetplot()` (2024-11-06, Wed)
     - if `options(cnetplot_subset = TRUE)`, all the edges and nodes of the genes that are not wanted to labeled will be remove 
 + `geom_cnet_label()` allows detail adjustment of `cnetplot()` labels (2024-11-06, Wed)
