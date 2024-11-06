@@ -18,17 +18,24 @@ cnetplot.list <- function(
     ) {
 
     # node_label <- match.arg(node_label, c("category", "all", "none", "item", "gene", "exclusive", "share"))
-    if (!node_label %in% c("category", "all", "none", "item", "gene", "exclusive", "share")) {
+    if (length(node_label) > 1) {
+        if (getOption('cnetplot_subset', default = FALSE)) {
+            x <- subset_cnet_list_item(x, node_label)
+            node_label <- 'all'
+        }
+    } else if (!node_label %in% c("category", "all", "none", "item", "gene", "exclusive", "share")) {
         if (!grepl("[><=]", node_label)) {
             stop("wrong parameter for 'node_label'")
         } else if (is.null(foldChange)) {
             stop("'foldChange' should not be NULL with the 'node_label' setting")
         }
-    }
+    } 
 
-    if (node_label == "gene") node_label = "item"
+    if (length(node_label) == 1 && node_label == "gene") node_label = "item"
     
     x <- subset_cnet_list(x, showCategory)
+
+
     g <- list2graph(x)
 
     V(g)$.hilight <- 1
@@ -60,7 +67,7 @@ cnetplot.list <- function(
             data=td_filter(!.data$.isCategory), size = 3 * size_item) +
         scale_size(range=c(3, 8) * size_category) 
     
-    if (node_label != "none") {
+    if (length(node_label) > 1 || node_label != "none") {
         p <- p + geom_cnet_label(node_label = node_label)
     }
 
@@ -82,8 +89,12 @@ ggplot_add.cnet_label <- function(object, plot, object_name) {
         params$mapping <- modifyList(default_mapping, object$mapping)
     }
 
+    x <- graph2list(plot$plot_env$data)
+
     if (!is.null(object$data)) {
         d <- object$data
+    } else if (length(node_label) > 1) {
+        d <- td_filter(.data$label %in% node_label)
     } else if (node_label == "all") {
         d <- NULL
     } else if (node_label == "category") {
@@ -91,8 +102,6 @@ ggplot_add.cnet_label <- function(object, plot, object_name) {
     } else if (node_label == "item") {
         d <- td_filter(!.data$.isCategory)
     } else if (node_label %in% c("exclusive", "share")) {
-        e <- as_edgelist(plot$plot_env$data)
-        x <- split(e[,2], e[,1])
         node_to_label <- lapply(seq_along(x), function(i) {
             j <- x[[i]] %in% unlist(x[-i])
             if (node_label == "exclusive") {
@@ -151,5 +160,11 @@ subset_cnet_list <- function(x, showCategory) {
     
     showCategory <- showCategory[showCategory <= n]
     return(x[showCategory])
+}
+
+subset_cnet_list_item <- function(x, showItem = "all") {
+    if (length(showItem) == 1 && showItem == "all") return(x)
+
+    lapply(x, \(y) y[y %in% showItem])
 }
 

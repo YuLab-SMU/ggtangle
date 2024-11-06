@@ -20,6 +20,11 @@ list2graph <- function(inputList, directed = FALSE) {
     return(g)
 }
 
+graph2list <- function(graph) {
+    e <- as_edgelist(graph)
+    split(e[,2], e[,1])
+}
+
 ##' Convert a list of gene IDs to data.frame object.
 ##'
 ##'
