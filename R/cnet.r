@@ -72,7 +72,7 @@ cnetplot.list <- function(
 ggplot_add.cnet_label <- function(object, plot, object_name) {
     params <- object$params
     node_label <- object$node_label
-    default_params <- list(bg.color = "white", bg.r = 1)
+    default_params <- list(bg.color = "white", bg.r = .1)
     params <- modifyList(default_params, params)
 
     default_mapping <- aes(label=.data$label)  
