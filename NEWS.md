@@ -1,5 +1,7 @@
-# ggtangle 0.0.4.003
+# ggtangle 0.0.4.004
 
++ update `cnetplot()` to address issues (2024-11-15, Fri)
+    - <https://github.com/YuLab-SMU/enrichplot/issues/293#issuecomment-2462502566>
 + update vignette to add a session of `cnetplot()` (2024-11-06, Wed)
 + 'node_label' can be a vector of selected items/genes to specify the items displayed in `cnetplot()` (2024-11-06, Wed)
     - if `options(cnetplot_subset = TRUE)`, all the edges and nodes of the genes that are not wanted to labeled will be remove 

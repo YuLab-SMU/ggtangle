@@ -17,6 +17,9 @@ cnetplot.list <- function(
         ...
     ) {
 
+    x <- subset_cnet_list(x, showCategory)
+    cnt <- setNames(sapply(x, length), names(x))
+
     # node_label <- match.arg(node_label, c("category", "all", "none", "item", "gene", "exclusive", "share"))
     if (length(node_label) > 1) {
         if (getOption('cnetplot_subset', default = FALSE)) {
@@ -33,9 +36,6 @@ cnetplot.list <- function(
 
     if (length(node_label) == 1 && node_label == "gene") node_label = "item"
     
-    x <- subset_cnet_list(x, showCategory)
-
-
     g <- list2graph(x)
 
     V(g)$.hilight <- 1
@@ -58,16 +58,28 @@ cnetplot.list <- function(
         fc_mapping = aes(color = I(color_item), alpha = I(.data$.hilight))
     }
 
-    p <- ggplot(g, layout = layout) + 
-        geom_edge(color=color_edge, size=size_edge) +
+    p <- ggplot(g, layout = layout) 
+
+    ## restore original category size 
+    if (length(node_label) > 1 &&
+        getOption('cnetplot_subset', default = FALSE)) {
+        p$data$size[match(names(cnt), p$data$label)] <- cnt
+    }
+
+    p <- p + geom_edge(color=color_edge, size=size_edge) +
         geom_point(aes(size=.data$size, alpha = I(.data$.hilight)), 
             data=td_filter(.data$.isCategory), 
             color = color_category) +
         geom_point(fc_mapping, 
             data=td_filter(!.data$.isCategory), size = 3 * size_item) +
-        scale_size(range=c(3, 8) * size_category) 
+        scale_size(range=c(3, 8) * size_category, breaks=pretty(cnt, n=min(4, diff(range(cnt))))) 
     
     if (length(node_label) > 1 || node_label != "none") {
+        if (length(node_label) > 1 ||
+            node_label %in% c("exclusive", "share")) {
+            p <- p + geom_cnet_label(node_label = 'category')
+        }
+
         p <- p + geom_cnet_label(node_label = node_label)
     }
 
