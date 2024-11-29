@@ -1,6 +1,6 @@
 Package: ggtangle
 Title: Draw Network with Data
-Version: 0.0.4.005
+Version: 0.0.5
 Authors@R: c(
     person(given = "Guangchuang", family = "Yu", email = "guangchuangyu@gmail.com",   role  = c("aut", "cre"), comment = c(ORCID = "0000-0002-6485-8781")))
 Description: Extends the 'ggplot2' plotting system to support network visualization. Inspired by 'ggtree', 'ggtangle' is designed to work with network associated data. 
@@ -13,6 +13,7 @@ Imports:
     yulab.utils (>= 0.1.7)
 Suggests:
     aplot,
+    ggnewscale,
     ggtree,
     knitr,
     prettydoc,

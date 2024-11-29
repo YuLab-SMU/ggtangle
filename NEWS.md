@@ -1,4 +1,4 @@
-# ggtangle 0.0.4.005
+# ggtangle 0.0.5
 
 + allows `color_edge = "category"` to color edges based on the category information in `cnetplot()` (2024-11-29, Fri)
 + update `cnetplot()` to address issues (2024-11-15, Fri)
