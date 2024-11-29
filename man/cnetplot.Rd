@@ -54,7 +54,7 @@ cnetplot(
 
 \item{size_item}{relative size of the item (e.g., genes)}
 
-\item{color_edge}{color of edge}
+\item{color_edge}{color of edge, e.g., "black". If \code{color = "category"}, then edges will be colored based on the category information.}
 
 \item{size_edge}{relative size of edge}
 

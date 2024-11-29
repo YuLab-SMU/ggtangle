@@ -1,5 +1,6 @@
-# ggtangle 0.0.4.004
+# ggtangle 0.0.4.005
 
++ allows `color_edge = "category"` to color edges based on the category information in `cnetplot()` (2024-11-29, Fri)
 + update `cnetplot()` to address issues (2024-11-15, Fri)
     - <https://github.com/YuLab-SMU/enrichplot/issues/293#issuecomment-2462502566>
 + update vignette to add a session of `cnetplot()` (2024-11-06, Wed)

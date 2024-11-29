@@ -8,7 +8,7 @@
 #' @param size_category relative size of the category
 #' @param color_item color of item node
 #' @param size_item relative size of the item (e.g., genes)
-#' @param color_edge color of edge
+#' @param color_edge color of edge, e.g., "black". If `color = "category"`, then edges will be colored based on the category information.
 #' @param size_edge relative size of edge
 #' @param node_label one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'
 #' @param foldChange numeric values to color the item (e.g, foldChange of gene expression values)

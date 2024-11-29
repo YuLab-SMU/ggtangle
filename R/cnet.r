@@ -66,8 +66,16 @@ cnetplot.list <- function(
         p$data$size[match(names(cnt), p$data$label)] <- cnt
     }
 
-    p <- p + geom_edge(color=color_edge, size=size_edge) +
-        geom_point(aes(size=.data$size, alpha = I(.data$.hilight)), 
+    if (color_edge == "category") {
+        ed <- get_edge_data(g)
+        names(ed)[1] <- 'category'
+        p <- p + geom_edge(aes(color=.data$category), data = ed, size=size_edge) +
+            ggnewscale::new_scale_color()              
+    } else {
+        p <- p + geom_edge(color=color_edge, size=size_edge) 
+    }
+    
+    p <- p + geom_point(aes(size=.data$size, alpha = I(.data$.hilight)), 
             data=td_filter(.data$.isCategory), 
             color = color_category) +
         geom_point(fc_mapping, 

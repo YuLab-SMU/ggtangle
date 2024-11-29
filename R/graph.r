@@ -102,16 +102,17 @@ ggplot_add.layer_edge <- function(object, plot, object_name) {
     if (is.null(object$data)) {
         # e <- get_edge_data(plot$plot_env$graph)
         e <- get_edge_data(plot$plot_env$data)
-        d <- plot$data
-        d1 <- d[match(e[,1], d$label), c("x", "y")]
-        d2 <- d[match(e[,2], d$label), c("x", "y")]
-        names(d2) <- c("x2", "y2")
-        dd <- cbind(d1, d2)
-        params$data <- cbind(e, dd)
     } else {
-        params$data <- object$data
+        e <- object$data
     }
-
+    
+    d <- plot$data
+    d1 <- d[match(e[,1], d$label), c("x", "y")]
+    d2 <- d[match(e[,2], d$label), c("x", "y")]
+    names(d2) <- c("x2", "y2")
+    dd <- cbind(d1, d2)
+    params$data <- cbind(e, dd)
+    
     default_mapping <- aes(
         x=.data$x, y=.data$y, 
         xend=.data$x2, yend=.data$y2
