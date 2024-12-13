@@ -1,3 +1,7 @@
+# ggtangle 0.0.5.001
+
++ allows using layout name (e.g., 'nicely', 'kk') as in 'ggraph' (2024-12-13, Fri)
+
 # ggtangle 0.0.5
 
 + allows `color_edge = "category"` to color edges based on the category information in `cnetplot()` (2024-11-29, Fri)

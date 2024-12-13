@@ -10,11 +10,12 @@
 #' @export
 ggplot.igraph <- function(data = NULL, 
         mapping = aes(), 
-        layout = igraph::layout_nicely, 
+        layout = "nicely", 
         ..., 
         environment = parent.frame()
     ) {
     
+    layout <- get_igraph_layout(layout)
     layout_data <- layout(data, ...)
     if(is.list(layout_data)) layout_data <- layout_data$layout
     d <- as.data.frame(layout_data) |> setNames(c("x", "y"))
