@@ -1,5 +1,7 @@
-# ggtangle 0.0.5.001
+# ggtangle 0.0.5.002
 
++ update DESCRIPTION to add citation (2024-12-17, Tue)
+  - G Yu (2018) <doi:10.1093/molbev/msy194>
 + allows using layout name (e.g., 'nicely', 'kk') as in 'ggraph' (2024-12-13, Fri)
 
 # ggtangle 0.0.5
