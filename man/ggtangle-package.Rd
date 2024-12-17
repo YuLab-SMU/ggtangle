@@ -6,7 +6,7 @@
 \alias{ggtangle-package}
 \title{ggtangle: Draw Network with Data}
 \description{
-Extends the 'ggplot2' plotting system to support network visualization. Inspired by 'ggtree', 'ggtangle' is designed to work with network associated data.
+Extends the 'ggplot2' plotting system to support network visualization. Inspired by the 'Method 1' in 'ggtree' (G Yu (2018) \doi{10.1093/molbev/msy194}), 'ggtangle' is designed to work with network associated data.
 }
 \author{
 \strong{Maintainer}: Guangchuang Yu \email{guangchuangyu@gmail.com} (\href{https://orcid.org/0000-0002-6485-8781}{ORCID})
