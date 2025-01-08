@@ -13,6 +13,7 @@ Imports:
     yulab.utils (>= 0.1.7)
 Suggests:
     aplot,
+    cli,
     ggnewscale,
     ggtree,
     knitr,

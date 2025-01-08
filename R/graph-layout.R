@@ -1,3 +1,4 @@
+#' @importFrom rlang caller_env
 as_igraphlayout <- function(type, call = caller_env()) {
     if (type %in% igraph_layouts) {
         layout <- type
@@ -26,6 +27,7 @@ is_igraphlayout <- function(type) {
     return(FALSE)
 }
 
+#' @importFrom yulab.utils get_fun_from_pkg
 get_igraph_layout <- function(layout) {
     if (is.function(layout)) return(layout)
     if (is_igraphlayout(layout)) {
