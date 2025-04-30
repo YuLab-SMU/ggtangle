@@ -1,3 +1,7 @@
+# ggtangle 0.0.6.001
+
++ add dependency on R >=4.1.0 as `|>` was used (2025-04-30, Wed)
+
 # ggtangle 0.0.6
 
 + update DESCRIPTION to add citation (2024-12-17, Tue)
