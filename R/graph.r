@@ -97,7 +97,7 @@ get_edge_data <- function(g) {
 #' @importFrom utils modifyList
 #' @method ggplot_add layer_edge
 #' @export 
-ggplot_add.layer_edge <- function(object, plot, object_name) {
+ggplot_add.layer_edge <- function(object, plot, object_name, ...) {
     params <- object$params
 
     if (is.null(object$data)) {
@@ -126,7 +126,7 @@ ggplot_add.layer_edge <- function(object, plot, object_name) {
     }
 
     layer <- do.call(object$geom, params)
-    ggplot_add(layer, plot, object_name)
+    ggplot_add(layer, plot, object_name, ...)
 }
 
 

@@ -96,7 +96,7 @@ cnetplot.list <- function(
 
 #' @method ggplot_add cnet_label
 #' @export
-ggplot_add.cnet_label <- function(object, plot, object_name) {
+ggplot_add.cnet_label <- function(object, plot, object_name, ...) {
     params <- object$params
     node_label <- object$node_label
     default_params <- list(bg.color = "white", bg.r = .1)
@@ -138,7 +138,7 @@ ggplot_add.cnet_label <- function(object, plot, object_name) {
     params$data <- d
 
     layer <- do.call(geom_text_repel, params) #(aes(label=.data$label), data = d, bg.color="white", bg.r=.1)    
-    ggplot_add(layer, plot, object_name)
+    ggplot_add(layer, plot, object_name, ...)
 }
 
 #' add labels of cnetplot

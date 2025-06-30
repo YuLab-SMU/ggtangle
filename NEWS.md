@@ -1,5 +1,6 @@
-# ggtangle 0.0.6.001
+# ggtangle 0.0.7
 
++ consistency with upcoming ggplot2 version (4.0.0) (2025-06-30, Mon)
 + add dependency on R >=4.1.0 as `|>` was used (2025-04-30, Wed)
 
 # ggtangle 0.0.6
