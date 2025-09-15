@@ -1,3 +1,7 @@
+# ggtangle 0.0.7.001
+
++ use `linewidth` instead of `size` aesthetic for graph edge (2025-09-15, Mon)
+
 # ggtangle 0.0.7
 
 + consistency with upcoming ggplot2 version (4.0.0) (2025-06-30, Mon)
