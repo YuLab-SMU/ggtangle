@@ -12,6 +12,7 @@
 #' @param size_edge relative size of edge
 #' @param node_label one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'
 #' @param foldChange numeric values to color the item (e.g, foldChange of gene expression values)
+#' @param fc_threshold threshold for absolute fold change to filter items
 #' @param hilight selected category to be highlighted
 #' @param hilight_alpha transparent value for not selected to be highlight
 #' @param ... additional parameters
@@ -24,6 +25,7 @@ cnetplot <- function(
         color_edge = "grey", size_edge=.5,
         node_label = "all", 
         foldChange = NULL,
+        fc_threshold = NULL,
         hilight = "none",
         hilight_alpha = .3,
         ...

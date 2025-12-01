@@ -1,3 +1,7 @@
+# ggtangle 0.0.9
+
++ add 'fc_threshold' to filter items by absolute fold change in `cnetplot()` (2025-11-30, Sun)
+
 # ggtangle 0.0.8
 
 + disable `geom_point()` for item nodes in `cnetplot()` when `size_item=0` (2025-11-16, Thu)

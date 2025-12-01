@@ -17,6 +17,7 @@ cnetplot(
   size_edge = 0.5,
   node_label = "all",
   foldChange = NULL,
+  fc_threshold = NULL,
   hilight = "none",
   hilight_alpha = 0.3,
   ...
@@ -34,6 +35,7 @@ cnetplot(
   size_edge = 0.5,
   node_label = "all",
   foldChange = NULL,
+  fc_threshold = NULL,
   hilight = "none",
   hilight_alpha = 0.3,
   ...
@@ -61,6 +63,8 @@ cnetplot(
 \item{node_label}{one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'}
 
 \item{foldChange}{numeric values to color the item (e.g, foldChange of gene expression values)}
+
+\item{fc_threshold}{threshold for absolute fold change to filter items}
 
 \item{hilight}{selected category to be highlighted}
 

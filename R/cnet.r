@@ -16,6 +16,7 @@ cnetplot.list <- function(
     size_edge = .5,
     node_label = "all",
     foldChange = NULL,
+    fc_threshold = NULL,
     hilight = "none",
     hilight_alpha = .3,
     ...
@@ -44,6 +45,17 @@ cnetplot.list <- function(
 
     if (length(node_label) == 1 && node_label == "gene") {
         node_label = "item"
+    }
+
+    # Filter genes by absolute fold change threshold
+    if (!is.null(fc_threshold) && !is.null(foldChange)) {
+        keep_genes <- names(foldChange)[abs(foldChange) > fc_threshold]
+        foldChange <- foldChange[keep_genes]
+        x <- lapply(x, function(gs) {
+            intersect(gs, keep_genes)
+        })
+        # Remove empty sets
+        x <- x[sapply(x, length) > 0]
     }
 
     g <- list2graph(x)
