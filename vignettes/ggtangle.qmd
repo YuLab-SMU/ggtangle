@@ -1,33 +1,27 @@
 ---
 title: "ggtangle: Draw Network with Data"
+format: 
+    html:
+        theme: none
+        embed-resources: true
+        fontsize: 1.1em
+        linestretch: 1.7
 author: "Guangchuang Yu\\
 
         School of Basic Medical Sciences, Southern Medical University"
 date: "`r Sys.Date()`"
-output:
-  prettydoc::html_pretty:
-    toc: true
-    theme: cayman
-    highlight: github
-  pdf_document:
-    toc: true
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{ggtangle introduction}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
   %\VignetteDepends{ggplot2}
-  %\VignetteDepends{grid}
-  %\VignetteDepends{aplot}
-  %\VignetteDepends{scatterpie}
-  %\VignetteDepends{ggtree}
-  %\usepackage[utf8]{inputenc}
+  %\VignetteDepends{igraph}
 ---
 
 
 
-```{r include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,
-                      message = TRUE)
-
+```{r}
+#| include: false
 library(yulab.utils)
 library(igraph)
 library(ggplot2)
@@ -59,7 +53,9 @@ p
 
 ## Node color and size
 
-```{r fig.width=15, fig.height=10}
+```{r}
+#| fig-width: 15
+#| fig-height: 10
 p1 <- p + geom_point(size=6, color='steelblue')
 p2 <- p + geom_point(aes(color = label %in% letters[1:5]), size=6)
 p3 <- p + geom_point(aes(size = igraph::degree(net)), color='steelblue') 
@@ -70,7 +66,9 @@ plot_list(p1, p2, p3, p4, ncol=2)
 
 ## Node label
 
-```{r fig.width=12, fig.height=5}
+```{r}
+#| fig-width: 12
+#| fig-height: 5
 p5 <- p + geom_label(aes(label=label, color=label %in% letters[1:5]), size=5)
 
 p6 <- p + geom_label(aes(label=label), size=5, data=ggtree::td_filter(label %in% letters[1:5]))
@@ -80,7 +78,9 @@ plot_list(p5, p6)
 
 ## Edge
 
-```{r fig.width=18, fig.height=6.5}
+```{r}
+#| fig-width: 18
+#| fig-height: 6.5
 p7 <- ggplot(net) + geom_edge(aes(linewidth=weight)) 
 p8 <- ggplot(net) + geom_edge(aes(color=type)) 
 p9 <- ggplot(net) + geom_edge(aes(linetype=type)) 
@@ -90,7 +90,9 @@ plot_list(p7, p8, p9, ncol=3)
 
 ## Network with external data
 
-```{r fig.width=8.8, fig.height=6.5}
+```{r}
+#| fig-width: 8.8
+#| fig-height: 6.5
 set.seed(123)
 expr <- abs(rnorm(10))
 d <- data.frame(label=V(net)$name, expression=expr)
@@ -100,7 +102,9 @@ p %<+% d + geom_point(aes(color = expression), size=6) +
 
 ## Network with pies
 
-```{r fig.width=8, fig.height=5.8}
+```{r}
+#| fig-width: 8
+#| fig-height: 5.8
 flow_info <- data.frame(from = LETTERS[c(1,2,3,3,4,5,6)],
                         to = LETTERS[c(5,5,5,6,7,6,7)])
 
@@ -126,8 +130,9 @@ p %<+% dd +
 
 ## Category-Item association plot
 
-
-```{r fig.width=13, fig.height=7}
+```{r}
+#| fig-width: 13
+#| fig-height: 7
 set.seed(123)
 x <- list(A = letters[1:10], B=letters[5:12], C=letters[sample(1:26, 15)])
 
@@ -145,7 +150,9 @@ plot_list(p1, p2, p3, p4, p5, p6, ncol=3, tag_levels = 'A')
 
 `node_label` can be selected items/genes to specify which genes to be labelled and can also used to subset the graph.
 
-```{r fig.width=8, fig.height=5}
+```{r}
+#| fig-width: 8
+#| fig-height: 5
 g1 <- cnetplot(x, node_label = letters[1:5]) 
 
 options(cnetplot_subset = TRUE)
@@ -155,7 +162,9 @@ plot_list(g1, g2)
 ```
 
 
-```{r, fig.width=11, fig.height=8}
+```{r}
+#| fig-width: 11
+#| fig-height: 8
 set.seed(123)
 d <- setNames(rnorm(26), letters)
 
