@@ -1,7 +1,9 @@
 # ggtangle: Draw Network with Data
 
-‘ggtangle’ extends the ‘ggplot2’ plotting system to support network
-visualization. ‘ggtangle’ is inspired by ‘ggtree’ and aims to work with
+
+Extends the ‘ggplot2’ plotting system to support network visualization.
+Inspired by the ‘Method 1’ in ‘ggtree’ (G Yu (2018)
+<doi:10.1093/molbev/msy194>), ‘ggtangle’ is designed to work with
 network associated data.
 
 ## :writing_hand: Authors

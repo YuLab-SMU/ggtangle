@@ -10,8 +10,8 @@ rd:
 	Rscript -e 'roxygen2::roxygenise(".")'
 
 readme:
-	Rscript -e 'rmarkdown::render("README.Rmd", rmarkdown::md_document(variant="gfm"), encoding="UTF-8")'
-
+	# Rscript -e 'rmarkdown::render("README.Rmd", rmarkdown::md_document(variant="gfm"), encoding="UTF-8")'
+	quarto render README.qmd
 
 build:
 	#cd ..;\

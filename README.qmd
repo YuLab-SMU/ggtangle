@@ -1,8 +1,12 @@
 
-# ggtangle: Draw Network with Data
+---
+title: "ggtangle: Draw Network with Data"
+format: gfm
+---
+
 
 ```{r comment="", echo=FALSE, results='asis'}
-cat(packageDescription('ggtangle')$Description)
+cat(packageDescription("ggtangle")$Description)
 ```
 
 ## :writing_hand: Authors
