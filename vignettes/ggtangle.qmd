@@ -88,6 +88,45 @@ p9 <- ggplot(net) + geom_edge(aes(linetype=type))
 plot_list(p7, p8, p9, ncol=3)
 ```
 
+## Layouts
+
+### Circular Layout
+
+```{r}
+#| fig-width: 7
+#| fig-height: 6
+ggplot(net, layout='circular') + geom_edge() + geom_point(size=5, color='blue')
+```
+
+
+### Linear Layout
+
+```{r}
+#| fig-width: 8.6
+#| fig-height: 3.5
+
+# Create a random graph
+set.seed(123)
+g <- sample_pa(20)
+V(g)$degree <- degree(g)
+V(g)$name <- as.character(1:20)
+
+# Plot with default linear layout
+p1 <- ggplot(g, layout = "linear") +
+    geom_edge(geom=geom_curve) +
+    geom_point() +
+    ggtitle("Default Linear")
+
+# Plot with sorted linear layout
+p2 <- ggplot(g, layout = "linear", sort.by = "degree") +
+    geom_edge(geom=geom_curve) +
+    geom_point(aes(size = degree)) +
+    ggtitle("Sorted Linear (by degree)") 
+
+plot_list(p1, p2, ncol=1)
+```
+
+
 ## Network with external data
 
 ```{r}

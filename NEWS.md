@@ -1,7 +1,9 @@
-# ggtangle 0.0.9.001
+# ggtangle 0.0.9.002
 
++ add more layouts (2025-12-01, Mon)
+    - `layout_circular`
+    - `layout_linear`
 + use 'quarto' as vignette builder (2025-12-01, Mon)
-+ add `layout_circular` (2025-12-01, Mon)
 
 # ggtangle 0.0.9
 

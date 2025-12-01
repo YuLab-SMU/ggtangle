@@ -41,6 +41,10 @@ get_igraph_layout <- function(layout) {
         return(layout_circular)
     }
 
+    if (layout == "layout_linear") {
+        return(layout_linear)
+    }
+
     get_fun_from_pkg("igraph", layout)
 }
 
@@ -75,6 +79,39 @@ layout_circular <- function(graph, sort.by = NULL, ...) {
     layout_in_circle(graph, order = ord, ...)
 }
 
+#' Linear layout
+#'
+#' @param graph A graph object.
+#' @param sort.by The attribute to sort the nodes by. Default is NULL.
+#' @param ... Additional arguments.
+#' @return A matrix of coordinates.
+#' @export
+#' @author Guangchuang Yu
+layout_linear <- function(graph, sort.by = NULL, ...) {
+    if (is.null(sort.by)) {
+        N <- length(V(graph))
+        return(matrix(c(1:N, rep(0, N)), ncol = 2))
+    }
+
+    if (sort.by == "degree") {
+        v <- degree(graph)
+    } else {
+        v <- vertex_attr(graph, sort.by)
+    }
+
+    if (is.null(v)) {
+        warning("sort.by attribute not found, using default order")
+        N <- length(V(graph))
+        return(matrix(c(1:N, rep(0, N)), ncol = 2))
+    }
+
+    ord <- order(v, decreasing = TRUE)
+    x <- numeric(length(ord))
+    x[ord] <- 1:length(ord)
+
+    matrix(c(x, rep(0, length(x))), ncol = 2)
+}
+
 
 igraph_layouts <- c(
     "as_bipartite",
@@ -94,5 +131,6 @@ igraph_layouts <- c(
     "with_fr",
     "with_kk",
     "with_lgl",
-    "circular"
+    "circular",
+    "linear"
 )
