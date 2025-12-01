@@ -5,30 +5,30 @@
 #' @method cnetplot list
 #' @export
 cnetplot.list <- function(
-    x,
-    layout = igraph::layout_nicely,
-    showCategory = 5,
-    color_category = "#E5C494",
-    size_category = 1,
-    color_item = "#B3B3B3",
-    size_item = 1,
-    color_edge = "grey",
-    size_edge = .5,
-    node_label = "all",
-    foldChange = NULL,
-    fc_threshold = NULL,
-    hilight = "none",
-    hilight_alpha = .3,
-    ...
+  x,
+  layout = "nicely",
+  showCategory = 5,
+  color_category = "#E5C494",
+  size_category = 1,
+  color_item = "#B3B3B3",
+  size_item = 1,
+  color_edge = "grey",
+  size_edge = .5,
+  node_label = "all",
+  foldChange = NULL,
+  fc_threshold = NULL,
+  hilight = "none",
+  hilight_alpha = .3,
+  ...
 ) {
     x <- subset_cnet_list(x, showCategory)
     cnt <- setNames(sapply(x, length), names(x))
 
     # node_label <- match.arg(node_label, c("category", "all", "none", "item", "gene", "exclusive", "share"))
     if (length(node_label) > 1) {
-        if (getOption('cnetplot_subset', default = FALSE)) {
+        if (getOption("cnetplot_subset", default = FALSE)) {
             x <- subset_cnet_list_item(x, node_label)
-            node_label <- 'all'
+            node_label <- "all"
         }
     } else if (
         !node_label %in%
@@ -44,7 +44,7 @@ cnetplot.list <- function(
     }
 
     if (length(node_label) == 1 && node_label == "gene") {
-        node_label = "item"
+        node_label <- "item"
     }
 
     # Filter genes by absolute fold change threshold
@@ -77,7 +77,7 @@ cnetplot.list <- function(
         V(g)$foldChange <- foldChange[V(g)$name]
         fc_mapping <- aes(color = foldChange, alpha = I(.data$.hilight))
     } else {
-        fc_mapping = aes(color = I(color_item), alpha = I(.data$.hilight))
+        fc_mapping <- aes(color = I(color_item), alpha = I(.data$.hilight))
     }
 
     p <- ggplot(g, layout = layout)
@@ -85,14 +85,14 @@ cnetplot.list <- function(
     ## restore original category size
     if (
         length(node_label) > 1 &&
-            getOption('cnetplot_subset', default = FALSE)
+            getOption("cnetplot_subset", default = FALSE)
     ) {
         p$data$size[match(names(cnt), p$data$label)] <- cnt
     }
 
     if (color_edge == "category") {
         ed <- get_edge_data(g)
-        names(ed)[1] <- 'category'
+        names(ed)[1] <- "category"
         p <- p +
             geom_edge(
                 aes(color = .data$category),
@@ -128,7 +128,7 @@ cnetplot.list <- function(
             length(node_label) > 1 ||
                 node_label %in% c("exclusive", "share")
         ) {
-            p <- p + geom_cnet_label(node_label = 'category')
+            p <- p + geom_cnet_label(node_label = "category")
         }
 
         p <- p + geom_cnet_label(node_label = node_label)
@@ -182,7 +182,7 @@ ggplot_add.cnet_label <- function(object, plot, object_name, ...) {
 
     params$data <- d
 
-    layer <- do.call(geom_text_repel, params) #(aes(label=.data$label), data = d, bg.color="white", bg.r=.1)
+    layer <- do.call(geom_text_repel, params) # (aes(label=.data$label), data = d, bg.color="white", bg.r=.1)
     ggplot_add(layer, plot, object_name, ...)
 }
 
@@ -196,10 +196,10 @@ ggplot_add.cnet_label <- function(object, plot, object_name, ...) {
 #' @export
 #' @author Guangchuang Yu
 geom_cnet_label <- function(
-    mapping = NULL,
-    data = NULL,
-    node_label = "all",
-    ...
+  mapping = NULL,
+  data = NULL,
+  node_label = "all",
+  ...
 ) {
     structure(
         list(
