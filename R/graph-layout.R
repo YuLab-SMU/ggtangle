@@ -44,10 +44,17 @@ get_igraph_layout <- function(layout) {
     get_fun_from_pkg("igraph", layout)
 }
 
+#' Circular layout
+#'
+#' @param graph A graph object.
+#' @param sort.by The attribute to sort the nodes by. Default is NULL.
+#' @param ... Additional arguments passed to \code{igraph::layout_in_circle}.
+#' @return A matrix of coordinates.
 #' @importFrom igraph layout_in_circle
 #' @importFrom igraph V
 #' @importFrom igraph degree
 #' @export
+#' @author Guangchuang Yu
 layout_circular <- function(graph, sort.by = NULL, ...) {
     if (is.null(sort.by)) {
         return(layout_in_circle(graph, ...))

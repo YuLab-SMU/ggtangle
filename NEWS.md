@@ -1,3 +1,8 @@
+# ggtangle 0.0.9.001
+
++ use 'quarto' as vignette builder (2025-12-01, Mon)
++ add `layout_circular` (2025-12-01, Mon)
+
 # ggtangle 0.0.9
 
 + add 'fc_threshold' to filter items by absolute fold change in `cnetplot()` (2025-11-30, Sun)

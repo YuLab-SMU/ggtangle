@@ -25,7 +25,7 @@ cnetplot(
 
 \method{cnetplot}{list}(
   x,
-  layout = igraph::layout_nicely,
+  layout = "nicely",
   showCategory = 5,
   color_category = "#E5C494",
   size_category = 1,
