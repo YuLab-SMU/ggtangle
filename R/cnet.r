@@ -80,7 +80,7 @@ cnetplot.list <- function(
         fc_mapping <- aes(color = I(color_item), alpha = I(.data$.hilight))
     }
 
-    p <- ggplot(g, layout = layout)
+    p <- ggplot(g, layout = layout, ...)
 
     ## restore original category size
     if (
