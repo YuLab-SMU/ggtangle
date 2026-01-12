@@ -19,7 +19,8 @@ Suggests:
     ggnewscale,
     ggtree,
     quarto,
-    scatterpie (>= 0.2.4)
+    scatterpie (>= 0.2.4),
+    ggiraph
 VignetteBuilder: quarto
 License: Artistic-2.0
 Encoding: UTF-8

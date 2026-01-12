@@ -181,9 +181,11 @@ get_edge_plot_data <- function(object, plot) {
     names(d2) <- c("x2", "y2")
     dd <- cbind(d1, d2)
     edge_data <- cbind(e, dd)
+    if (.check_interactive_attr(object)){
+        edge_data$`.edge_id` <- paste0(e[,1], "_", e[,2]) 
+    }
     return(edge_data)
 }
-
 
 #' @importFrom ggplot2 ggplot_add
 #' @importFrom utils modifyList
@@ -260,4 +262,10 @@ ggplot_add.layer_edge_text <- function(object, plot, object_name, ...) {
     
     layer <- do.call(object$geom, geom_params)
     ggplot_add(layer, plot, object_name, ...)
+}
+
+.check_interactive_attr <- function(x){
+    attrs <- c("tooltip", "data_id", "onclick")
+    flag <- any(names(x$mapping) %in% attrs)
+    return(flag)
 }
