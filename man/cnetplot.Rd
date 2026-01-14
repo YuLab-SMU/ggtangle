@@ -15,6 +15,7 @@ cnetplot(
   size_item = 1,
   color_edge = "grey",
   size_edge = 0.5,
+  categorySizeBy = ~itemNum,
   node_label = "all",
   foldChange = NULL,
   fc_threshold = NULL,
@@ -33,6 +34,7 @@ cnetplot(
   size_item = 1,
   color_edge = "grey",
   size_edge = 0.5,
+  categorySizeBy = ~itemNum,
   node_label = "all",
   foldChange = NULL,
   fc_threshold = NULL,
@@ -60,6 +62,8 @@ cnetplot(
 
 \item{size_edge}{relative size of edge}
 
+\item{categorySizeBy}{An expression (e.g., \code{itemNum}, \code{p.adjust}) or a formula (e.g., \code{~ -log10(p.adjust)}) to set the category node size.}
+
 \item{node_label}{one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'}
 
 \item{foldChange}{numeric values to color the item (e.g, foldChange of gene expression values)}
@@ -74,4 +78,9 @@ cnetplot(
 }
 \description{
 category-item network plot
+}
+\examples{
+x <- list(A = letters[1:10], B = letters[5:12])
+attr(x, "p.adjust") <- c(A = 0.01, B = 0.2)
+p <- cnetplot(x, node_label = "none", categorySizeBy = ~ -log10(p.adjust))
 }

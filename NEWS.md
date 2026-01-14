@@ -1,5 +1,8 @@
-# ggtangle 0.1.0.002
+# ggtangle 0.1.0.003
 
++ add `categorySizeBy` to control category node size in `cnetplot()` (2026-01-14, Wed)
+    - `categorySizeBy` supports an expression (e.g., `itemNum`, `p.adjust`) or a formula (e.g., `~ -log10(p.adjust)`)
+    - default is `~itemNum`
 + add `geom_edge_interactive()` and `geom_edge_text_interactive()` (2026-01-12, Mon)
 + support edge data with vertex names in `get_edge_plot_data()` to avoid ambiguity with non-unique labels (2026-01-12, Mon)
 + bug fixed in coloring edges of `cnetplot()` (2026-01-09, Fri)

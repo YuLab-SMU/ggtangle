@@ -10,6 +10,7 @@
 #' @param size_item relative size of the item (e.g., genes)
 #' @param color_edge color of edge, e.g., "black". If `color = "category"`, then edges will be colored based on the category information.
 #' @param size_edge relative size of edge
+#' @param categorySizeBy An expression (e.g., `itemNum`, `p.adjust`) or a formula (e.g., `~ -log10(p.adjust)`) to set the category node size.
 #' @param node_label one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'
 #' @param foldChange numeric values to color the item (e.g, foldChange of gene expression values)
 #' @param fc_threshold threshold for absolute fold change to filter items
@@ -17,12 +18,17 @@
 #' @param hilight_alpha transparent value for not selected to be highlight
 #' @param ... additional parameters
 #' @export
+#' @examples
+#' x <- list(A = letters[1:10], B = letters[5:12])
+#' attr(x, "p.adjust") <- c(A = 0.01, B = 0.2)
+#' p <- cnetplot(x, node_label = "none", categorySizeBy = ~ -log10(p.adjust))
 cnetplot <- function(
         x, layout = igraph::layout_nicely,
         showCategory = 5,
         color_category= "#E5C494", size_category = 1, 
         color_item = "#B3B3B3", size_item = 1, 
         color_edge = "grey", size_edge=.5,
+        categorySizeBy = ~itemNum,
         node_label = "all", 
         foldChange = NULL,
         fc_threshold = NULL,
