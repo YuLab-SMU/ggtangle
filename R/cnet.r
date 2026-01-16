@@ -161,7 +161,9 @@ cnetplot.list <- function(
         }
     }
 
-    if (color_edge == "category") {
+    if (is.na(color_edge)) {
+        p <- p
+    } else if (isTRUE(color_edge == "category")) {
         ed <- get_edge_data(g, names = TRUE)
         names(ed)[1] <- "category"
         p <- p +
