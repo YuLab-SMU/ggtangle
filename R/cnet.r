@@ -3,6 +3,8 @@
 #' @importFrom ggplot2 scale_size
 #' @importFrom ggrepel geom_text_repel
 #' @method cnetplot list
+#' @param hilight_alpha transparent value for not selected to be highlight
+#' @param ... additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., `curvature = 0.2`).
 #' @export
 cnetplot.list <- function(
   x,
@@ -27,6 +29,13 @@ cnetplot.list <- function(
         stop("`categorySize` is not supported; use `categorySizeBy` instead.")
     }
     dots$categorySize <- NULL
+
+    edge_layer_params <- list(linewidth = size_edge)
+    if (!is.null(dots$curvature)) {
+        edge_layer_params$curvature <- dots$curvature
+        edge_layer_params$geom <- ggplot2::geom_curve
+        dots$curvature <- NULL
+    }
 
     ## `categorySizeBy` usage demonstrations
     ## x <- list(A = letters[1:10], B = letters[5:12])
@@ -167,13 +176,19 @@ cnetplot.list <- function(
         ed <- get_edge_data(g, names = TRUE)
         names(ed)[1] <- "category"
         p <- p +
-            geom_edge(
-                aes(color = .data$category),
-                data = ed,
-                linewidth = size_edge
-            ) 
+            do.call(
+                geom_edge,
+                c(
+                    list(
+                        aes(color = .data$category),
+                        data = ed
+                    ),
+                    edge_layer_params
+                )
+            )
     } else {
-        p <- p + geom_edge(color = color_edge, linewidth = size_edge)
+        edge_layer_params$color <- color_edge
+        p <- p + do.call(geom_edge, edge_layer_params)
     }
 
     p <- p +

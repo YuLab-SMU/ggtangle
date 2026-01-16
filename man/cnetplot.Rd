@@ -74,7 +74,7 @@ cnetplot(
 
 \item{hilight_alpha}{transparent value for not selected to be highlight}
 
-\item{...}{additional parameters}
+\item{...}{additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., \code{curvature = 0.2}).}
 }
 \description{
 category-item network plot

@@ -16,7 +16,7 @@
 #' @param fc_threshold threshold for absolute fold change to filter items
 #' @param hilight selected category to be highlighted
 #' @param hilight_alpha transparent value for not selected to be highlight
-#' @param ... additional parameters
+#' @param ... additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., `curvature = 0.2`).
 #' @export
 #' @examples
 #' x <- list(A = letters[1:10], B = letters[5:12])
