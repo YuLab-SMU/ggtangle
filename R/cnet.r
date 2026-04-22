@@ -3,6 +3,9 @@
 #' @importFrom ggplot2 scale_size
 #' @importFrom ggrepel geom_text_repel
 #' @method cnetplot list
+#' @details For list input, `showCategory` accepts either a single integer for
+#'   the first `n` categories, a numeric vector of category indices, or a
+#'   character vector of category names.
 #' @param hilight_alpha transparent value for not selected to be highlight
 #' @param ... additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., `curvature = 0.2`).
 #' @export

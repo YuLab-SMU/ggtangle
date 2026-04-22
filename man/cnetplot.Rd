@@ -48,7 +48,10 @@ cnetplot(
 
 \item{layout}{network layout}
 
-\item{showCategory}{selected category to be displayed}
+\item{showCategory}{categories to display. Use a single number to show the
+first \code{n} categories, a numeric vector to select categories by index (for
+example, \code{c(1, 10, 53)}), or a character vector to select categories by
+name.}
 
 \item{color_category}{color of category node}
 
@@ -79,8 +82,14 @@ cnetplot(
 \description{
 category-item network plot
 }
+\details{
+For list input, \code{showCategory} accepts either a single integer for
+the first \code{n} categories, a numeric vector of category indices, or a
+character vector of category names.
+}
 \examples{
 x <- list(A = letters[1:10], B = letters[5:12])
 attr(x, "p.adjust") <- c(A = 0.01, B = 0.2)
 p <- cnetplot(x, node_label = "none", categorySizeBy = ~ -log10(p.adjust))
+p <- cnetplot(x, showCategory = c(1, 2))
 }
