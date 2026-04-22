@@ -1,3 +1,10 @@
+# ggtangle 0.1.2
+
++ fix: handle node_label = "none" in cnet label layer (2026-04-22, Wed)
+    - add an explicit "none" branch in ggplot_add.cnet_label()
+    - avoid parsing "none" as a foldChange filter expression
+    - fix compareCluster cnetplot when node_label is set to "none"
+
 # ggtangle 0.1.1
 
 + `cnetplot()` supports `curvature` parameter to curve the edges (2026-01-16, Fri)

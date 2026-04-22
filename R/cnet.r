@@ -269,6 +269,8 @@ ggplot_add.cnet_label <- function(object, plot, object_name, ...) {
         d <- object$data
     } else if (length(node_label) > 1) {
         d <- td_filter(.data$label %in% node_label)
+    } else if (node_label == "none") {
+        d <- td_filter(FALSE)
     } else if (node_label == "all") {
         d <- NULL
     } else if (node_label == "category") {
