@@ -1,3 +1,7 @@
+# ggtangle 0.1.2.001
+
++ `size_category=0` in `cnetplot` will disable the drawing of category nodes (2026-04-24, Fri)
+
 # ggtangle 0.1.2
 
 + fix: handle node_label = "none" in cnet label layer (2026-04-22, Wed)

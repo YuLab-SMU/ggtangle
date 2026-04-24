@@ -194,12 +194,14 @@ cnetplot.list <- function(
         p <- p + do.call(geom_edge, edge_layer_params)
     }
 
-    p <- p +
-        geom_point(
-            aes(size = .data$size, alpha = I(.data$.hilight)),
-            data = td_filter(.data$.isCategory),
-            color = color_category
-        )
+    if (size_category > 0) {
+        p <- p +
+            geom_point(
+                aes(size = .data$size, alpha = I(.data$.hilight)),
+                data = td_filter(.data$.isCategory),
+                color = color_category
+            )
+    }
     if (size_item > 0) {
         vals <- categorySizeValues
         if (
