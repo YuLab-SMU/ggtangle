@@ -55,6 +55,20 @@ ggplot.igraph <- function(data = NULL,
     return(p)
 }
 
+#' @method ggplot mechgraph
+#' @importFrom igraph as.igraph
+#' @export
+#' Convert a mechgraph object to an igraph (via the mechgraph package's
+#' \code{as.igraph} method) and plot it through ggtangle's igraph machinery
+#' (layouts, geom_edge(), geom_point(), geom_label(), ...). Use
+#' \code{mg_from_string()} / \code{mg_from_biogrid()} to build the mechgraph.
+ggplot.mechgraph <- function(data = NULL, mapping = aes(), layout = "nicely",
+                             ..., environment = parent.frame()) {
+    g <- igraph::as.igraph(data)
+    ggplot.igraph(g, mapping = mapping, layout = layout, ...,
+                  environment = environment)
+}
+
 #' layer to draw edges of a network
 #' 
 #' @param mapping aesthetic mapping, default is NULL

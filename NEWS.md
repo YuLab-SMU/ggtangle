@@ -1,5 +1,6 @@
-# ggtangle 0.1.2.001
+# ggtangle 0.1.3
 
++ `mechgraph` object supports
 + `size_category=0` in `cnetplot` will disable the drawing of category nodes (2026-04-24, Fri)
 
 # ggtangle 0.1.2
