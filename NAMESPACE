@@ -2,6 +2,7 @@
 
 S3method(cnetplot,list)
 S3method(ggplot,igraph)
+S3method(ggplot,mechgraph)
 S3method(ggplot_add,cnet_label)
 S3method(ggplot_add,layer_edge)
 S3method(ggplot_add,layer_edge_text)

@@ -15,6 +15,8 @@
 #' @param size_edge relative size of edge
 #' @param categorySizeBy An expression (e.g., `itemNum`, `p.adjust`) or a formula (e.g., `~ -log10(p.adjust)`) to set the category node size.
 #' @param node_label one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'
+#' @param node_label_size size of the node label text. When `NULL` (default)
+#'   the built-in label size is used.
 #' @param foldChange numeric values to color the item (e.g, foldChange of gene expression values)
 #' @param fc_threshold threshold for absolute fold change to filter items
 #' @param hilight selected category to be highlighted
@@ -34,6 +36,7 @@ cnetplot <- function(
         color_edge = "grey", size_edge=.5,
         categorySizeBy = ~itemNum,
         node_label = "all", 
+        node_label_size = NULL,
         foldChange = NULL,
         fc_threshold = NULL,
         hilight = "none",

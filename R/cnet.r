@@ -21,6 +21,7 @@ cnetplot.list <- function(
   size_edge = .5,
   categorySizeBy = ~itemNum,
   node_label = "all",
+  node_label_size = NULL,
   foldChange = NULL,
   fc_threshold = NULL,
   hilight = "none",
@@ -238,14 +239,20 @@ cnetplot.list <- function(
     }
 
     if (length(node_label) > 1 || node_label != "none") {
+        label_params <- if (is.null(node_label_size)) {
+            list()
+        } else {
+            list(size = node_label_size)
+        }
+
         if (
             length(node_label) > 1 ||
                 node_label %in% c("exclusive", "share")
         ) {
-            p <- p + geom_cnet_label(node_label = "category")
+            p <- p + do.call(geom_cnet_label, c(list(node_label = "category"), label_params))
         }
 
-        p <- p + geom_cnet_label(node_label = node_label)
+        p <- p + do.call(geom_cnet_label, c(list(node_label = node_label), label_params))
     }
 
     return(p)
