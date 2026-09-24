@@ -17,6 +17,7 @@ cnetplot(
   size_edge = 0.5,
   categorySizeBy = ~itemNum,
   node_label = "all",
+  node_label_size = NULL,
   foldChange = NULL,
   fc_threshold = NULL,
   hilight = "none",
@@ -36,6 +37,7 @@ cnetplot(
   size_edge = 0.5,
   categorySizeBy = ~itemNum,
   node_label = "all",
+  node_label_size = NULL,
   foldChange = NULL,
   fc_threshold = NULL,
   hilight = "none",
@@ -68,6 +70,9 @@ name.}
 \item{categorySizeBy}{An expression (e.g., \code{itemNum}, \code{p.adjust}) or a formula (e.g., \code{~ -log10(p.adjust)}) to set the category node size.}
 
 \item{node_label}{one of 'all', 'none', 'category', 'item', 'exclusive' or 'share'}
+
+\item{node_label_size}{size of the node label text. When \code{NULL} (default)
+the built-in label size is used.}
 
 \item{foldChange}{numeric values to color the item (e.g, foldChange of gene expression values)}
 

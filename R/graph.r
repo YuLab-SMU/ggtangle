@@ -1,14 +1,26 @@
 
 
+#' Plot an igraph object
+#' 
+#' @method ggplot igraph
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 aes
-#' @method ggplot igraph
 #' @importFrom stats setNames
 #' @importFrom rlang .data
 #' @importFrom igraph V
 #' @importFrom igraph vertex_attr
 #' @importFrom igraph vertex_attr_names
 #' @importFrom ggfun theme_nothing
+#' @param data an igraph object (or a mechgraph object for the
+#'   `ggplot.mechgraph` method) to be converted and plotted.
+#' @param mapping default aesthetics, default is `aes()`.
+#' @param layout network layout. Supported values are the layout names
+#'   handled by [layout_circular], [layout_linear], [layout_fishbone] and other
+#'   ggtangle/igraph layouts, or a custom layout function. Default is
+#'   `"nicely"`.
+#' @param ... additional parameters passed to the layout function.
+#' @param environment environment in which to evaluate the mapping, default is
+#'   `parent.frame()`.
 #' @export
 ggplot.igraph <- function(data = NULL, 
         mapping = aes(), 
@@ -55,13 +67,10 @@ ggplot.igraph <- function(data = NULL,
     return(p)
 }
 
+#' @rdname ggplot.igraph
 #' @method ggplot mechgraph
 #' @importFrom igraph as.igraph
 #' @export
-#' Convert a mechgraph object to an igraph (via the mechgraph package's
-#' \code{as.igraph} method) and plot it through ggtangle's igraph machinery
-#' (layouts, geom_edge(), geom_point(), geom_label(), ...). Use
-#' \code{mg_from_string()} / \code{mg_from_biogrid()} to build the mechgraph.
 ggplot.mechgraph <- function(data = NULL, mapping = aes(), layout = "nicely",
                              ..., environment = parent.frame()) {
     g <- igraph::as.igraph(data)

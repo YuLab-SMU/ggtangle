@@ -212,7 +212,7 @@ p7 <- cnetplot(x, foldChange=d) +
     scale_color_gradient2(name='associated data', low='darkgreen', high='firebrick')
 
 # filter items/genes by log2FC values to label
-p8 <- cnetplot(x, foldChange=d, node_labe = ">1") + 
+p8 <- cnetplot(x, foldChange=d, node_label = ">1") + 
     scale_color_gradient2(name='associated data', low='darkgreen', high='firebrick')
 
 # Highlight categories

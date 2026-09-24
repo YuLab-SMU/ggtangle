@@ -26,38 +26,49 @@ export(layout_circular)
 export(layout_fishbone)
 export(layout_linear)
 export(td_filter)
-importFrom(ggfun,"%<+%")
-importFrom(ggfun,td_filter)
-importFrom(ggfun,theme_nothing)
-importFrom(ggplot2,aes)
-importFrom(ggplot2,geom_label)
-importFrom(ggplot2,geom_point)
-importFrom(ggplot2,geom_segment)
-importFrom(ggplot2,geom_text)
-importFrom(ggplot2,ggplot)
-importFrom(ggplot2,ggplot_add)
-importFrom(ggplot2,ggsave)
-importFrom(ggplot2,scale_size)
+importFrom(ggfun,
+  "%<+%",
+  td_filter,
+  theme_nothing
+)
+importFrom(ggplot2,
+  aes,
+  geom_label,
+  geom_point,
+  geom_segment,
+  geom_text,
+  ggplot,
+  ggplot_add,
+  ggsave,
+  scale_size
+)
 importFrom(ggrepel,geom_text_repel)
 importFrom(grid,arrow)
-importFrom(igraph,'V<-')
-importFrom(igraph,V)
-importFrom(igraph,as_edgelist)
-importFrom(igraph,degree)
-importFrom(igraph,edge_attr)
-importFrom(igraph,edge_attr_names)
-importFrom(igraph,graph_from_data_frame)
-importFrom(igraph,layout_in_circle)
-importFrom(igraph,neighbors)
-importFrom(igraph,tk_coords)
-importFrom(igraph,tkplot)
-importFrom(igraph,vertex_attr)
-importFrom(igraph,vertex_attr_names)
-importFrom(rlang,.data)
-importFrom(rlang,caller_env)
-importFrom(rlang,sym)
+importFrom(igraph,
+  'V<-',
+  V,
+  as.igraph,
+  as_edgelist,
+  degree,
+  edge_attr,
+  edge_attr_names,
+  graph_from_data_frame,
+  layout_in_circle,
+  neighbors,
+  tk_coords,
+  tkplot,
+  vertex_attr,
+  vertex_attr_names
+)
+importFrom(rlang,
+  .data,
+  caller_env,
+  sym
+)
 importFrom(stats,setNames)
 importFrom(utils,modifyList)
-importFrom(yulab.utils,get_fun_from_pkg)
-importFrom(yulab.utils,yulab_abort)
-importFrom(yulab.utils,yulab_msg)
+importFrom(yulab.utils,
+  get_fun_from_pkg,
+  yulab_abort,
+  yulab_msg
+)

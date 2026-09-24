@@ -20,10 +20,10 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggfun}{\code{\link[ggfun:attacher]{\%<+\%}}, \code{\link[ggfun]{td_filter}}}
+  \item{ggfun}{\code{\link[ggfun:\%<+\%]{\%<+\%}}, \code{\link[ggfun:td_filter]{td_filter()}}}
 
-  \item{ggplot2}{\code{\link[ggplot2]{aes}}, \code{\link[ggplot2:geom_text]{geom_label}}, \code{\link[ggplot2]{geom_point}}, \code{\link[ggplot2]{geom_segment}}, \code{\link[ggplot2]{geom_text}}, \code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{ggsave}}}
+  \item{ggplot2}{\code{\link[ggplot2:aes]{aes()}}, \code{\link[ggplot2:geom_label]{geom_label()}}, \code{\link[ggplot2:geom_point]{geom_point()}}, \code{\link[ggplot2:geom_segment]{geom_segment()}}, \code{\link[ggplot2:geom_text]{geom_text()}}, \code{\link[ggplot2:ggplot]{ggplot()}}, \code{\link[ggplot2:ggsave]{ggsave()}}}
 
-  \item{grid}{\code{\link[grid]{arrow}}}
+  \item{grid}{\code{\link[grid:arrow]{arrow()}}}
 }}
 
