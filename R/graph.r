@@ -210,6 +210,74 @@ get_edge_plot_data <- function(object, plot) {
     return(edge_data)
 }
 
+#' Construct ggraph-compatible cubic Bezier control points for circular edges
+#'
+#' The old ggraph `geom_edge_arc()` uses two control points on the radial
+#' segments from each endpoint toward the layout centre. This is the circular
+#' branch of ggraph's `create_arc()` and is intentionally kept here so the
+#' ggtangle backend can reproduce that geometry without depending on ggraph.
+#'
+#' @noRd
+circular_bezier_edges <- function(edge_data) {
+    if (is.null(edge_data) || nrow(edge_data) == 0) return(edge_data)
+    cx <- mean(c(edge_data$x, edge_data$x2))
+    cy <- mean(c(edge_data$y, edge_data$y2))
+    x0 <- edge_data$x - cx
+    y0 <- edge_data$y - cy
+    x1 <- edge_data$x2 - cx
+    y1 <- edge_data$y2 - cy
+    dx <- x1 - x0
+    dy <- y1 - y0
+    half_dist <- sqrt(dx^2 + dy^2) / 2
+    r0 <- sqrt(x0^2 + y0^2)
+    r1 <- sqrt(x1^2 + y1^2)
+    f0 <- ifelse(r0 > 0, 1 - half_dist / r0, 1)
+    f1 <- ifelse(r1 > 0, 1 - half_dist / r1, 1)
+    out <- data.frame(
+        x = c(edge_data$x, cx + x0 * f0, cx + x1 * f1, edge_data$x2),
+        y = c(edge_data$y, cy + y0 * f0, cy + y1 * f1, edge_data$y2),
+        group = rep(seq_len(nrow(edge_data)), 4)
+    )
+    out <- out[order(out$group, rep(1:4, each = nrow(edge_data))), , drop = FALSE]
+    extras <- edge_data[rep(seq_len(nrow(edge_data)), each = 4),
+        setdiff(names(edge_data), c("x", "y", "x2", "y2")), drop = FALSE]
+    cbind(out, extras)
+}
+
+#' Reverse edge endpoints so a single curvature value bows every edge outward
+#'
+#' `geom_curve()` draws all edges of a layer with one signed curvature, which
+#' makes a radial layout look like a uniform pinwheel. For an edge with
+#' direction `d = (dx, dy)` and outward vector `out = midpoint - centroid`,
+#' positive curvature bulges toward the clockwise-perpendicular of `d`,
+#' i.e. `(dy, -dx)`. Flipping the endpoints negates `d`, hence the bulge side,
+#' so edges with `(dy, -dx) %*% out < 0` are reversed to bulge outward.
+#'
+#' @param edge_data data.frame with columns `x`, `y`, `x2`, `y2`
+#' @return data.frame with some rows' endpoints swapped
+#' @noRd
+orient_edge_curvature <- function(edge_data) {
+    if (is.null(edge_data) || nrow(edge_data) == 0) return(edge_data)
+    cx <- mean(c(edge_data$x, edge_data$x2))
+    cy <- mean(c(edge_data$y, edge_data$y2))
+    dx <- edge_data$x2 - edge_data$x
+    dy <- edge_data$y2 - edge_data$y
+    out_x <- (edge_data$x + edge_data$x2) / 2 - cx
+    out_y <- (edge_data$y + edge_data$y2) / 2 - cy
+    dot <- dy * out_x - dx * out_y
+    flip <- dot < 0 & (dx^2 + dy^2 > 0)
+    flip[is.na(flip)] <- FALSE
+    if (any(flip)) {
+        tmp_x <- edge_data$x[flip]
+        tmp_y <- edge_data$y[flip]
+        edge_data$x[flip] <- edge_data$x2[flip]
+        edge_data$y[flip] <- edge_data$y2[flip]
+        edge_data$x2[flip] <- tmp_x
+        edge_data$y2[flip] <- tmp_y
+    }
+    edge_data
+}
+
 #' @importFrom ggplot2 ggplot_add
 #' @importFrom utils modifyList
 #' @method ggplot_add layer_edge
@@ -230,7 +298,20 @@ ggplot_add.layer_edge <- function(object, plot, object_name, ...) {
         params$mapping <- modifyList(default_mapping, object$mapping)
     }
     
-    # Filter params for geom_segment (remove custom ones if any remained)
+    # A Bezier edge layer receives four control points per edge. This is the
+    # circular arc geometry used by the former ggraph backend.
+    if (identical(object$geom, ggfun::geom_bezier) ||
+        identical(object$geom, ggfun::GeomBezier)) {
+        params$data <- circular_bezier_edges(edge_data)
+        params$mapping <- aes(x = .data$x, y = .data$y, group = .data$group)
+    } else if (!is.null(params$curvature)) {
+        # Backward-compatible geom_curve path for callers that explicitly
+        # supply another curved geom.
+        len2 <- (edge_data$x2 - edge_data$x)^2 + (edge_data$y2 - edge_data$y)^2
+        params$data <- edge_data[is.na(len2) | len2 > 0, , drop = FALSE]
+        params$data <- orient_edge_curvature(params$data)
+    }
+
     special_params <- c("angle_calc", "label_dodge")
     geom_params <- params[!names(params) %in% special_params]
     

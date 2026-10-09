@@ -7,7 +7,13 @@
 #'   the first `n` categories, a numeric vector of category indices, or a
 #'   character vector of category names.
 #' @param hilight_alpha transparent value for not selected to be highlight
-#' @param ... additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., `curvature = 0.2`).
+#' @param ... additional parameters. One important parameter is 'curvature'
+#'   (default is 0), which can be used to curve the edges (e.g.,
+#'   `curvature = 0.2`). For circular layouts, this uses a cubic Bezier arc
+#'   layer with the same radial control-point geometry as the former
+#'   `ggraph::geom_edge_arc()` implementation. In circular mode, any non-zero
+#'   curvature enables this arc layer; the arc geometry is intentionally kept
+#'   compatible with the former backend.
 #' @export
 cnetplot.list <- function(
   x,
@@ -37,7 +43,7 @@ cnetplot.list <- function(
     edge_layer_params <- list(linewidth = size_edge)
     if (!is.null(dots$curvature)) {
         edge_layer_params$curvature <- dots$curvature
-        edge_layer_params$geom <- ggplot2::geom_curve
+        edge_layer_params$geom <- ggfun::geom_bezier
         dots$curvature <- NULL
     }
 

@@ -82,7 +82,13 @@ the built-in label size is used.}
 
 \item{hilight_alpha}{transparent value for not selected to be highlight}
 
-\item{...}{additional parameters. One important parameter is 'curvature' (default is 0), which can be used to curve the edges (e.g., \code{curvature = 0.2}).}
+\item{...}{additional parameters. One important parameter is 'curvature'
+(default is 0), which can be used to curve the edges (e.g.,
+\code{curvature = 0.2}). For circular layouts, this uses a cubic Bezier arc
+layer with the same radial control-point geometry as the former
+\code{ggraph::geom_edge_arc()} implementation. In circular mode, any non-zero
+curvature enables this arc layer; the arc geometry is intentionally kept
+compatible with the former backend.}
 }
 \description{
 category-item network plot

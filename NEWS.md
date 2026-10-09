@@ -1,5 +1,13 @@
 # ggtangle 0.1.3
 
++ `layout_cnet_category_rail()` provides a category-rail layout for tracing item-category
+  relationships with less edge crossing.
++ `cnetplot(curvature = ...)` now uses a ggraph-compatible circular cubic
+  Bezier arc layer supplied by `ggfun`, reproducing the former
+  `geom_edge_arc()` radial control-point geometry (2026-10-04, Sun)
+    - circular edges use endpoint-directed control points that contract toward
+      the layout centre, preserving the original open-centre arc appearance
+    - closes <https://github.com/YuLab-SMU/clusterProfiler/issues/799>
 + `cnetplot()` supports `node_label_size` to control the size of the node label text (2026-09-22, Tue)
     - affects `enrichplot::cnetplot()` for `enrichResult`/`gseaResult`/`compareClusterResult`/(`mnseaResult`)
     - when `NULL` (default), the built-in label size is used
